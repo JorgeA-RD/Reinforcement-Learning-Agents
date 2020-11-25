@@ -116,9 +116,9 @@ class DDPG_Agent:
             ids = np.random.randint(low=0,high=self.cap_buffer, size=self.batch_size)
             states = np.asarray([self.rep_buffer['s'][i] for i in ids],dtype=np.float32)
             actions = np.asarray([self.rep_buffer['a'][i] for i in ids],dtype=np.float32)
-            rewards = np.asarray([self.rep_buffer['r'][i] for i in ids],dtype=np.float32)
+            rewards = np.asarray([[self.rep_buffer['r'][i]] for i in ids],dtype=np.float32)
             next_states = np.asarray([self.rep_buffer['sn'][i] for i in ids],dtype=np.float32)
-            dones = np.asarray([self.rep_buffer['done'][i] for i in ids])
+            dones = np.asarray([[self.rep_buffer['done'][i]] for i in ids])
             
             
             action_target= self.actor_target(next_states)
